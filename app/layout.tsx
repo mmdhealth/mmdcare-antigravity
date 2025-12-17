@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Nunito_Sans } from "next/font/google";
-import "./globals.css";
+import { Inter as FontSans } from "next/font/google";
 import { Sidebar } from "@/components/sidebar";
+import { ThemeProvider } from "@/components/theme-provider";
+import "@/app/globals.css";
 import { cn } from "@/lib/utils";
 
-const nunito = Nunito_Sans({
+const fontSans = FontSans({
   subsets: ["latin"],
-  variable: "--font-nunito-sans",
+  variable: "--font-sans",
 });
 
 export const metadata: Metadata = {
@@ -21,13 +22,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="sv" suppressHydrationWarning>
-      <body className={cn("min-h-screen bg-background font-sans antialiased flex", nunito.variable)}>
-        <Sidebar />
-        <main className="flex-1 md:pl-64 transition-all duration-200 w-full bg-background">
-          <div className="p-4 md:p-8 max-w-[1600px] mx-auto space-y-8">
+      <body className={cn(
+        "min-h-screen bg-background font-sans antialiased flex",
+        fontSans.variable
+      )}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Sidebar />
+          <main className="flex-1 p-8 ml-64 overflow-y-auto h-screen bg-background/50">
             {children}
-          </div>
-        </main>
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   );

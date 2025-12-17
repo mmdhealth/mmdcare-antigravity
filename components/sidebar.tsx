@@ -1,15 +1,26 @@
+
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { LayoutDashboard, FileText, Bot, Settings, Menu } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+    LayoutDashboard,
+    FileText,
+    MessageSquare,
+    Settings,
+    User,
+    LogOut,
+    Menu
+} from "lucide-react";
+import { ModeToggle } from "@/components/mode-toggle";
 import { useState } from "react";
 
 const navItems = [
     { name: "Översikt", href: "/dashboard", icon: LayoutDashboard },
     { name: "Journaldata", href: "/journaldata", icon: FileText },
-    { name: "Hälsa+ GPT", href: "/gpt", icon: Bot },
+    { name: "Hälsa+ GPT", href: "/gpt", icon: MessageSquare },
     { name: "Inställningar", href: "/inställningar", icon: Settings },
 ];
 
@@ -69,14 +80,17 @@ export function Sidebar() {
                     })}
                 </nav>
 
-                <div className="p-4 border-t border-zinc-100">
-                    <div className="flex items-center gap-3">
-                        <div className="h-10 w-10 rounded-full bg-zinc-200 flex items-center justify-center text-zinc-600 font-bold">
-                            AA
+                <div className="p-4 border-t border-zinc-200 dark:border-zinc-800">
+                    <div className="flex items-center gap-3 mb-4">
+                        <div className="h-10 w-10 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
+                            <User className="h-5 w-5 text-zinc-500" />
                         </div>
                         <div>
-                            <p className="text-sm font-semibold text-zinc-900">Anna A.</p>
-                            <p className="text-xs text-zinc-500">Kardiolog</p>
+                            <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100">Dr. Samuel</p>
+                            <p className="text-xs text-zinc-500">Överläkare</p>
+                        </div>
+                        <div className="ml-auto">
+                            <ModeToggle />
                         </div>
                     </div>
                 </div>
@@ -84,3 +98,4 @@ export function Sidebar() {
         </>
     );
 }
+
