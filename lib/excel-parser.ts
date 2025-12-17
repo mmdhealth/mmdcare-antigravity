@@ -61,7 +61,19 @@ function parseDate(row: any): string | undefined {
 export async function getHealthData() {
     if (!fs.existsSync(FILE_PATH)) {
         console.error("Excel file not found at", FILE_PATH);
-        return { latest: {}, history: {} };
+        // Return empty structure matching the interface
+        return {
+            latest: {},
+            history: {
+                steps: [],
+                weight: [],
+                heartRate: [],
+                ldl: [],
+                glucose: [],
+                egfr: [],
+                oxygen: []
+            }
+        };
     }
 
     const fileBuffer = fs.readFileSync(FILE_PATH);
